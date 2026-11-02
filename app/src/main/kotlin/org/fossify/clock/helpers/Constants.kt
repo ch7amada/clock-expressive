@@ -41,6 +41,12 @@ const val WAS_INITIAL_WIDGET_SET_UP = "was_initial_widget_set_up"
 const val DATA_EXPORT_EXTENSION = ".json"
 const val LAST_DATA_EXPORT_PATH = "last_alarms_export_path"
 const val MIGRATE_FIRST_DAY_OF_WEEK = "migrate_first_day_of_week"
+const val THEME_MODE = "m3e_theme_mode"           // Int: 0 = system, 1 = light, 2 = dark
+const val USE_DYNAMIC_COLOR = "m3e_use_dynamic_color" // Boolean, default true
+const val USE_PURE_BLACK = "m3e_use_pure_black"   // Boolean, default false
+const val THEME_MODE_SYSTEM = 0
+const val THEME_MODE_LIGHT = 1
+const val THEME_MODE_DARK = 2
 
 const val TABS_COUNT = 4
 const val EDITED_TIME_ZONE_SEPARATOR = ":"

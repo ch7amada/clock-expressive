@@ -65,4 +65,7 @@
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res
     -->
 
+    <!-- M3 Expressive rewrite -->
+    <string name="m3e_theme_preview_alarm_button">Alarm</string>
+
 </resources>

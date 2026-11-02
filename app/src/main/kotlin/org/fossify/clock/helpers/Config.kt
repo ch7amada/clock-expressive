@@ -1,6 +1,7 @@
 package org.fossify.clock.helpers
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.media.RingtoneManager
 import androidx.core.content.edit
 import org.fossify.clock.extensions.gson.gson
@@ -143,6 +144,26 @@ class Config(context: Context) : BaseConfig(context) {
         set(lastDataExportPath) = prefs.edit {
             putString(LAST_DATA_EXPORT_PATH, lastDataExportPath)
         }
+
+    var themeMode: Int
+        get() = prefs.getInt(THEME_MODE, THEME_MODE_SYSTEM)
+        set(themeMode) = prefs.edit { putInt(THEME_MODE, themeMode) }
+
+    var useDynamicColor: Boolean
+        get() = prefs.getBoolean(USE_DYNAMIC_COLOR, true)
+        set(useDynamicColor) = prefs.edit { putBoolean(USE_DYNAMIC_COLOR, useDynamicColor) }
+
+    var usePureBlack: Boolean
+        get() = prefs.getBoolean(USE_PURE_BLACK, false)
+        set(usePureBlack) = prefs.edit { putBoolean(USE_PURE_BLACK, usePureBlack) }
+
+    fun registerPrefsListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+    }
+
+    fun unregisterPrefsListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+        prefs.unregisterOnSharedPreferenceChangeListener(listener)
+    }
 
     @Deprecated("Remove this method in future releases")
     var migrateFirstDayOfWeek: Boolean

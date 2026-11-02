@@ -63,6 +63,18 @@ echo "[$(date +%T)] $ROLE $TASK -> $LOG"
 START=$(date +%s)
 run_once; RC=$?
 if [ $RC -eq 124 ]; then echo "[$(date +%T)] stalled, retrying once"; run_once; RC=$?; fi
+# Resume: coder/fix sessions sometimes die mid-run (model process crash -> "stream ended without finish_reason").
+# If the build is still broken, start a fresh session that only finishes the job (max RESUMES times).
+if [ "$AGENT" = coder ]; then
+  for i in $(seq 1 "${RESUMES:-2}"); do
+    bash tools/agents/compile.sh > .agent-logs/.compile.$$ 2>&1
+    grep -q "COMPILE OK" .agent-logs/.compile.$$ && { RC=0; break; }
+    echo "[resume $i] build broken after rc=$RC, resuming in a fresh session" | tee -a "$LOG"
+    PROMPT="Continue task $SPEC. A previous session already wrote most of the code (see \`bash tools/agents/diff.sh\`) but the build is broken. Do NOT rewrite files from scratch: run \`bash tools/agents/compile.sh\`, then fix each error with small edits (look up real signatures in .api-src/ when unsure). Then finish anything from the spec that is still missing, and run compile.sh until COMPILE OK. $EXTRA"
+    run_once; RC=$?
+  done
+  rm -f .agent-logs/.compile.$$
+fi
 echo "[$(date +%T)] done rc=$RC in $(( ($(date +%s)-START)/60 )) min; log tail:"
 tail -15 "$LOG"
 exit $RC

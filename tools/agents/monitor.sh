@@ -8,6 +8,10 @@ HOST="${LLAMA_HOST:-ahmed@192.168.178.172}"
 STALL_MIN="${STALL_MIN:-8}"
 declare -A seen
 last_active=$(date +%s); stall_reported=0; cur=""; was_running=0
+# On (re)start, don't replay what is already in the newest log.
+cur=$(ls -t .agent-logs/*.log 2>/dev/null | head -1)
+if [ -n "$cur" ]; then seen[$cur]=$(wc -l < "$cur"); echo "MONITOR attached to $(basename "$cur" .log)"; fi
+pgrep -f "opencode run --standalone --agent" >/dev/null && was_running=1
 while true; do
   running=0; pgrep -f "opencode run --standalone --agent" >/dev/null && running=1
   newest=$(ls -t .agent-logs/*.log 2>/dev/null | head -1)

@@ -47,6 +47,9 @@ const val USE_PURE_BLACK = "m3e_use_pure_black"   // Boolean, default false
 const val THEME_MODE_SYSTEM = 0
 const val THEME_MODE_LIGHT = 1
 const val THEME_MODE_DARK = 2
+const val CLOCK_FACE_STYLE = "m3e_clock_face_style" // Int: 0 = digital, 1 = analogue
+const val CLOCK_FACE_DIGITAL = 0
+const val CLOCK_FACE_ANALOGUE = 1
 
 const val TABS_COUNT = 4
 const val EDITED_TIME_ZONE_SEPARATOR = ":"

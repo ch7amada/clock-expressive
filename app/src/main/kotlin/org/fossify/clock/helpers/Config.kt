@@ -157,6 +157,10 @@ class Config(context: Context) : BaseConfig(context) {
         get() = prefs.getBoolean(USE_PURE_BLACK, false)
         set(usePureBlack) = prefs.edit { putBoolean(USE_PURE_BLACK, usePureBlack) }
 
+    var clockFaceStyle: Int
+        get() = prefs.getInt(CLOCK_FACE_STYLE, CLOCK_FACE_DIGITAL)
+        set(clockFaceStyle) = prefs.edit { putInt(CLOCK_FACE_STYLE, clockFaceStyle) }
+
     fun registerPrefsListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         prefs.registerOnSharedPreferenceChangeListener(listener)
     }

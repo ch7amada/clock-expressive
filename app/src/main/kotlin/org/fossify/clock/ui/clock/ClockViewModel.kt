@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.fossify.clock.R
 import org.fossify.clock.extensions.config
+import org.fossify.clock.helpers.CLOCK_FACE_ANALOGUE
+import org.fossify.clock.helpers.CLOCK_FACE_DIGITAL
 import org.fossify.clock.extensions.getAllTimeZonesModified
 import org.fossify.clock.extensions.getClosestEnabledAlarmString
 import org.fossify.clock.extensions.getFormattedDate
@@ -61,6 +63,18 @@ class ClockViewModel(app: Application) : AndroidViewModel(app) {
 
     val use24h: Boolean
         get() = context.config.use24HourFormat
+
+    private val _faceStyle = MutableStateFlow(context.config.clockFaceStyle)
+
+    /** The hero clock face: [CLOCK_FACE_DIGITAL] or [CLOCK_FACE_ANALOGUE], persisted in [org.fossify.clock.helpers.Config]. */
+    val faceStyle: StateFlow<Int> = _faceStyle
+
+    /** Switches the hero clock face and persists the choice. */
+    fun toggleFaceStyle() {
+        val newStyle = if (_faceStyle.value == CLOCK_FACE_ANALOGUE) CLOCK_FACE_DIGITAL else CLOCK_FACE_ANALOGUE
+        context.config.clockFaceStyle = newStyle
+        _faceStyle.value = newStyle
+    }
 
     init {
         EventBus.getDefault().register(this)

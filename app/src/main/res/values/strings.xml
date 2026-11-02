@@ -73,5 +73,6 @@
     <string name="m3e_same_time">Same time</string>
     <string name="m3e_world_clock">World clock</string>
     <string name="m3e_add_time_zone">Add time zone</string>
+    <string name="m3e_switch_clock_style">Switch clock style</string>
 
 </resources>

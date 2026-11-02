@@ -1,8 +1,17 @@
 package org.fossify.clock.ui.clock
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.fadeIn
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,6 +42,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import java.util.Calendar
@@ -45,9 +56,12 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.runtime.collectAsState
 import org.fossify.clock.R
 import org.fossify.clock.extensions.getFormattedDate
+import org.fossify.clock.helpers.CLOCK_FACE_ANALOGUE
+import org.fossify.clock.helpers.CLOCK_FACE_DIGITAL
 import org.fossify.clock.ui.components.AnimatedTimeText
 import org.fossify.clock.ui.components.SectionHeader
 import org.fossify.clock.ui.components.ShapeBadge
+import org.fossify.clock.ui.components.pressSquish
 import org.fossify.clock.ui.components.segmentedGroup
 import org.fossify.clock.ui.navigation.ClockTopAppBar
 import java.time.Instant
@@ -70,6 +84,7 @@ fun ClockScreen(
     val now by viewModel.now.collectAsState()
     val nextAlarm by viewModel.nextAlarm.collectAsState()
     val timeZones by viewModel.timeZones.collectAsState()
+    val faceStyle by viewModel.faceStyle.collectAsState()
     val use24h = viewModel.use24h
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -91,6 +106,7 @@ fun ClockScreen(
     }
 
     val spatialSpec = MaterialTheme.motionScheme.defaultSpatialSpec<Float>()
+    val effectsSpec = MaterialTheme.motionScheme.defaultEffectsSpec<Float>()
 
     // Hoisted outside the item so the hero's 0.92→1.0 scale-in runs only on
     // first composition, not when the item scrolls back into the LazyColumn.
@@ -100,6 +116,7 @@ fun ClockScreen(
     }
 
     val hapticFeedback = LocalHapticFeedback.current
+    val switchStyleLabel = stringResource(R.string.m3e_switch_clock_style)
 
     Scaffold(
         topBar = {
@@ -133,17 +150,44 @@ fun ClockScreen(
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
         ) {
             item {
-                HeroClock(
-                    nowMillis = now,
-                    use24h = use24h,
+                val interactionSource = remember { MutableInteractionSource() }
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .graphicsLayer {
                             scaleX = heroScale.value
                             scaleY = heroScale.value
                         }
-                        .padding(top = 24.dp),
-                )
+                        .padding(top = 24.dp)
+                        .pressSquish(interactionSource)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null,
+                        ) {
+                            hapticFeedback.performHapticFeedback(
+                                if (faceStyle == CLOCK_FACE_DIGITAL) HapticFeedbackType.ToggleOn else HapticFeedbackType.ToggleOff,
+                            )
+                            viewModel.toggleFaceStyle()
+                        }
+                        .semantics {
+                            onClick(label = switchStyleLabel, action = null)
+                        },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    AnimatedContent(
+                        targetState = faceStyle,
+                        transitionSpec = {
+                            (fadeIn(animationSpec = effectsSpec) + scaleIn(initialScale = 0.85f, animationSpec = spatialSpec)) togetherWith
+                            (fadeOut(animationSpec = effectsSpec) + scaleOut(targetScale = 1.1f, animationSpec = spatialSpec))
+                        },
+                        label = "clockFace",
+                    ) { style ->
+                        when (style) {
+                            CLOCK_FACE_ANALOGUE -> AnalogClock(nowMillis = now)
+                            else -> HeroClock(nowMillis = now, use24h = use24h)
+                        }
+                    }
+                }
             }
             item {
                 Text(

@@ -46,6 +46,8 @@ Exact public signatures are in `docs/rewrite/api/<Component>.md` (e.g. `ButtonGr
 `ListItem.md`, `AppBar.md`, `FloatingActionButton.md`, `WavyProgressIndicator.md`, `ShortNavigationBar.md`,
 `WideNavigationRail.md`, `TimePicker.md`, `MaterialShapes.md`, `FloatingToolbar.md`, `IconButton.md`, `Button.md`).
 Also `ColorScheme.md`, `Typography.md` (incl. variable-font API), `ListItemDefaults.md`, `IconButtonDefaults.md`.
+**Before writing any animation, modifier, haptics or Morph/shape code, read `docs/rewrite/api/Animation.md`** (exact imports;
+there is no `fadeInAndScaleIn`, motionScheme specs need `<Float>`, use the Compose `Matrix`, not `android.graphics.Matrix`).
 **Grep them before using an expressive API — do not guess parameter names.** Library jars and the Gradle cache are
 off-limits (permission denied) — if something is not in `docs/rewrite/api/`, write your best attempt and let
 `tools/agents/compile.sh` tell you what is wrong.

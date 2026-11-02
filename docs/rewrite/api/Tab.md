@@ -1,0 +1,5 @@
+
+### Tab.kt
+- `public fun Tab( selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true, text: @Composable (() -> Unit)? = null, icon: @Composable (() -> Unit)? = null, selectedContentColor: Color = LocalContentColor.current, unselectedContentColor: Color = selectedContentColor, interactionSource: MutableInteractionSource? = null, )`
+- `public fun LeadingIconTab( selected: Boolean, onClick: () -> Unit, text: @Composable () -> Unit, icon: @Composable () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true, selectedContentColor: Color = LocalContentColor.current, unselectedContentColor: Color = selectedContentColor, interactionSource: MutableInteractionSource? = null, )`
+- `public fun Tab( selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true, selectedContentColor: Color = LocalContentColor.current, unselectedContentColor: Color = selectedContentColor, interactionSource: MutableInteractionSource? = null, content: @Composable ColumnScope.() -> Unit, )`

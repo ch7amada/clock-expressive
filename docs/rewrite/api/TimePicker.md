@@ -1,0 +1,21 @@
+
+### TimePicker.kt
+- `public fun TimePicker( state: TimePickerState, modifier: Modifier = Modifier, colors: TimePickerColors = TimePickerDefaults.colors(), layoutType: TimePickerLayoutType = TimePickerDefaults.layoutType(), )`
+- `public fun TimePicker( state: TimePickerState, shapes: TimePickerShapes, modifier: Modifier = Modifier, colors: TimePickerColors = TimePickerDefaults.vibrantColors(), layoutType: TimePickerLayoutType = TimePickerDefaults.layoutType(), )`
+- `public fun TimeInput( state: TimePickerState, modifier: Modifier = Modifier, colors: TimeInputColors = TimeInputDefaults.colors(), )`
+- `public fun TimeInput( state: TimePickerState, shapes: TimePickerShapes, modifier: Modifier = Modifier, colors: TimeInputColors = TimeInputDefaults.vibrantColors(), )`
+- `public fun TimeInput( state: TimePickerState, shapes: TimePickerShapes, toggle: @Composable () -> Unit, modifier: Modifier = Modifier, colors: TimeInputColors = TimeInputDefaults.vibrantColors(), )`
+- `public fun TimeScroll( state: TimePickerState, shapes: TimePickerShapes, modifier: Modifier = Modifier, colors: TimePickerColors = TimePickerDefaults.vibrantColors(), )`
+- `public fun TimeScroll( state: TimePickerState, shapes: TimePickerShapes, toggle: @Composable () -> Unit, modifier: Modifier = Modifier, colors: TimePickerColors = TimePickerDefaults.vibrantColors(), )`
+- `public fun colors(): TimePickerColors`
+- `public fun colors( clockDialColor: Color = Color.Unspecified, clockDialSelectedContentColor: Color = Color.Unspecified, clockDialContentColor: Color = Color.Unspecified, selectorColor: Color = Color.Unspecified, containerColor: Color = Color.Unspecified, periodSelectorBorderColor: Color = Color.Unspecified, periodSelectorSelectedContainerColor: Color = Color.Unspecified, periodSelectorContainerColor: Color = Color.Unspecified, periodSelectorSelectedContentColor: Color = Color.Unspecified, periodSelectorContentColor: Color = Color.Unspecified, timeSelectorSelectedContainerColor: Color = Color.Unspecified, timeSelectorContainerColor: Color = Color.Unspecified, timeSelectorSelectedContentColor: Color = Color.Unspecified, timeSelectorContentColor: Color = Color.Unspecified, ): TimePickerColors`
+- `public fun vibrantColors(): TimePickerColors`
+- `public fun vibrantColors( clockDialColor: Color = Color.Unspecified, clockDialSelectedContentColor: Color = Color.Unspecified, clockDialContentColor: Color = Color.Unspecified, selectorColor: Color = Color.Unspecified, containerColor: Color = Color.Unspecified, periodSelectorBorderColor: Color = Color.Unspecified, periodSelectorSelectedContainerColor: Color = Color.Unspecified, periodSelectorContainerColor: Color = Color.Unspecified, periodSelectorSelectedContentColor: Color = Color.Unspecified, periodSelectorContentColor: Color = Color.Unspecified, timeSelectorSelectedContainerColor: Color = Color.Unspecified, timeSelectorContainerColor: Color = Color.Unspecified, timeSelectorSelectedContentColor: Color = Color.Unspecified, timeSelectorContentColor: Color = Color.Unspecified, ): TimePickerColors`
+- `public fun layoutType(): TimePickerLayoutType`
+- `public fun shapes(): TimePickerShapes`
+- `public fun shapes( timeFieldShape: Shape? = null, periodSelectorShape: Shape? = null, ): TimePickerShapes`
+- `public fun colors(): TimeInputColors`
+- `public fun colors( containerColor: Color = Color.Unspecified, periodSelectorBorderColor: Color = Color.Unspecified, periodSelectorSelectedContainerColor: Color = Color.Unspecified, periodSelectorContainerColor: Color = Color.Unspecified, periodSelectorSelectedContentColor: Color = Color.Unspecified, periodSelectorContentColor: Color = Color.Unspecified, timeTextFieldColors: TextFieldColors? = null, ): TimeInputColors`
+- `public fun vibrantColors(): TimeInputColors`
+- `public fun vibrantColors( containerColor: Color = Color.Unspecified, periodSelectorBorderColor: Color = Color.Unspecified, periodSelectorSelectedContainerColor: Color = Color.Unspecified, periodSelectorContainerColor: Color = Color.Unspecified, periodSelectorSelectedContentColor: Color = Color.Unspecified, periodSelectorContentColor: Color = Color.Unspecified, timeTextFieldColors: TextFieldColors? = null, ): TimeInputColors`
+- `public fun rememberTimePickerState( initialHour: Int = 0, initialMinute: Int = 0, is24Hour: Boolean = is24HourFormat, ): TimePickerState`

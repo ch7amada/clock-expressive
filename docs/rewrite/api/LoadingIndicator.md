@@ -1,0 +1,6 @@
+
+### LoadingIndicator.kt
+- [EXPERIMENTAL-EXPRESSIVE] `public fun LoadingIndicator( progress: () -> Float, modifier: Modifier = Modifier, color: Color = LoadingIndicatorDefaults.indicatorColor, polygons: List<RoundedPolygon> = LoadingIndicatorDefaults.DeterminateIndicatorPolygons, ): Unit`
+- [EXPERIMENTAL-EXPRESSIVE] `public fun LoadingIndicator( modifier: Modifier = Modifier, color: Color = LoadingIndicatorDefaults.indicatorColor, polygons: List<RoundedPolygon> = LoadingIndicatorDefaults.IndeterminateIndicatorPolygons, ): Unit`
+- [EXPERIMENTAL-EXPRESSIVE] `public fun ContainedLoadingIndicator( progress: () -> Float, modifier: Modifier = Modifier, containerColor: Color = LoadingIndicatorDefaults.containedContainerColor, indicatorColor: Color = LoadingIndicatorDefaults.containedIndicatorColor, containerShape: Shape = LoadingIndicatorDefaults.containerShape, polygons: List<RoundedPolygon> = LoadingIndicatorDefaults.DeterminateIndicatorPolygons, ): Unit`
+- [EXPERIMENTAL-EXPRESSIVE] `public fun ContainedLoadingIndicator( modifier: Modifier = Modifier, containerColor: Color = LoadingIndicatorDefaults.containedContainerColor, indicatorColor: Color = LoadingIndicatorDefaults.containedIndicatorColor, containerShape: Shape = LoadingIndicatorDefaults.containerShape, polygons: List<RoundedPolygon> = LoadingIndicatorDefaults.IndeterminateIndicatorPolygons, ): Unit`

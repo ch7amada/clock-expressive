@@ -1,0 +1,4 @@
+
+### ModalBottomSheet.kt
+- `public fun ModalBottomSheet( onDismissRequest: () -> Unit, modifier: Modifier = Modifier, sheetState: SheetState = rememberBottomSheetState(initialValue = Hidden), sheetMaxWidth: Dp = BottomSheetDefaults.SheetMaxWidth, sheetGesturesEnabled: Boolean = true, shape: Shape = BottomSheetDefaults.ExpandedShape, containerColor: Color = BottomSheetDefaults.ContainerColor, contentColor: Color = contentColorFor(containerColor), tonalElevation: Dp = 0.dp, scrimColor: Color = BottomSheetDefaults.ScrimColor, dragHandle: @Composable (() -> Unit)? = { BottomSheetDefaults.DragHandle() }, contentWindowInsets: @Composable () -> WindowInsets = { BottomSheetDefaults.modalWindowInsets }, properties: ModalBottomSheetProperties = ModalBottomSheetProperties(), content: @Composable ColumnScope.() -> Unit, )`
+- `public fun rememberModalBottomSheetState( skipPartiallyExpanded: Boolean = false, confirmValueChange: (SheetValue) -> Boolean = { true }, ): SheetState`

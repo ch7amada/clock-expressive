@@ -6,6 +6,7 @@ import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
 }
@@ -64,6 +65,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
         buildConfig = true
     }
 
@@ -113,6 +115,10 @@ android {
         compilerOptions.jvmTarget.set(
             JvmTarget.fromTarget(project.libs.versions.app.build.kotlinJVMTarget.get())
         )
+        compilerOptions.optIn.addAll(
+            "androidx.compose.material3.ExperimentalMaterial3Api",
+            "androidx.compose.material3.ExperimentalMaterial3ExpressiveApi",
+        )
     }
 
     namespace = project.property("APP_ID").toString()
@@ -150,6 +156,10 @@ dependencies {
     implementation(libs.autofittextview)
     implementation(libs.eventbus)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
+    debugImplementation(libs.compose.ui.tooling)
 
     implementation(libs.bundles.room)
     ksp(libs.androidx.room.compiler)

@@ -14,3 +14,4 @@ fastlane/report.xml
 
 # agent orchestration logs
 .agent-logs/
+/.api-src/

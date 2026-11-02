@@ -48,9 +48,13 @@ Exact public signatures are in `docs/rewrite/api/<Component>.md` (e.g. `ButtonGr
 Also `ColorScheme.md`, `Typography.md` (incl. variable-font API), `ListItemDefaults.md`, `IconButtonDefaults.md`.
 **Before writing any animation, modifier, haptics or Morph/shape code, read `docs/rewrite/api/Animation.md`** (exact imports;
 there is no `fadeInAndScaleIn`, motionScheme specs need `<Float>`, use the Compose `Matrix`, not `android.graphics.Matrix`).
-**Grep them before using an expressive API — do not guess parameter names.** Library jars and the Gradle cache are
-off-limits (permission denied) — if something is not in `docs/rewrite/api/`, write your best attempt and let
-`tools/agents/compile.sh` tell you what is wrong.
+**Grep them before using an expressive API — do not guess parameter names.**
+**Real library sources** are in `.api-src/` (material3 1.5.0-beta02, compose animation/foundation/ui/runtime 1.12.1,
+graphics-shapes 1.1.0). When a compile error says a name/parameter is wrong, grep there with the grep tool, e.g. pattern
+`fun AlertDialog\(` in `.api-src/material3-android`, then read only the matching lines (offset/limit). Never read whole files.
+The Gradle cache and anything outside the repo are off-limits.
+**Shell:** only the two commands above work. `ls`, `find`, `git`, `cat`, pipes (`|`) and `;` chains are denied — use the
+glob tool to list files and the grep/read tools to inspect them.
 `MaterialShapes` members: Circle Square Slanted Arch Fan Arrow SemiCircle Oval Pill Triangle Diamond ClamShell Pentagon
 Gem Sunny VerySunny Cookie4Sided Cookie6Sided Cookie7Sided Cookie9Sided Cookie12Sided Ghostish Clover4Leaf Clover8Leaf
 Burst SoftBurst Boom SoftBoom Flower Puffy PuffyDiamond PixelCircle PixelTriangle Bun Heart (all `RoundedPolygon`,

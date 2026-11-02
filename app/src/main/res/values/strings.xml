@@ -70,5 +70,8 @@
     <string name="m3e_start">Start</string>
     <string name="m3e_pause">Pause</string>
     <string name="m3e_coming_soon">Coming soon</string>
+    <string name="m3e_same_time">Same time</string>
+    <string name="m3e_world_clock">World clock</string>
+    <string name="m3e_add_time_zone">Add time zone</string>
 
 </resources>

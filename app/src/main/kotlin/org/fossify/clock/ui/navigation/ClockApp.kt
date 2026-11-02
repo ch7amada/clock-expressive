@@ -47,6 +47,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.flow.Flow
+import org.fossify.clock.ui.clock.ClockScreen
 
 /**
  * The expressive app shell: four top-level tabs (Clock, Alarm, Stopwatch, Timer) rendered
@@ -147,6 +148,7 @@ fun ClockApp(
                 exitTransition = exitTransition,
                 onOpenSettings = onOpenSettings,
                 onOpenAbout = onOpenAbout,
+                onOpenAlarms = { navigateToTab(ClockTab.ALARM) },
             )
         }
     } else {
@@ -173,6 +175,7 @@ fun ClockApp(
                 exitTransition = exitTransition,
                 onOpenSettings = onOpenSettings,
                 onOpenAbout = onOpenAbout,
+                onOpenAlarms = { navigateToTab(ClockTab.ALARM) },
             )
         }
     }
@@ -196,6 +199,7 @@ private fun ClockTabNavHost(
     exitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition,
     onOpenSettings: () -> Unit,
     onOpenAbout: () -> Unit,
+    onOpenAlarms: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -206,7 +210,12 @@ private fun ClockTabNavHost(
     ) {
         // F05+ replaces these placeholders with the real screens
         composable<ClockRoute> {
-            TabPlaceholder(ClockTab.CLOCK, onOpenSettings, onOpenAbout)
+            ClockScreen(
+                onOpenSettings = onOpenSettings,
+                onOpenAbout = onOpenAbout,
+                onOpenAlarms = onOpenAlarms,
+                onAddTimeZone = {}, // F07
+            )
         }
         composable<AlarmRoute> {
             TabPlaceholder(ClockTab.ALARM, onOpenSettings, onOpenAbout)

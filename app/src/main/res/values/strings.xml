@@ -69,5 +69,6 @@
     <string name="m3e_theme_preview_alarm_button">Alarm</string>
     <string name="m3e_start">Start</string>
     <string name="m3e_pause">Pause</string>
+    <string name="m3e_coming_soon">Coming soon</string>
 
 </resources>

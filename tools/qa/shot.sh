@@ -14,7 +14,7 @@ if [ -n "$DARK" ]; then "$ADB" shell cmd uimode night yes; else "$ADB" shell cmd
 "$ADB" shell am force-stop $PKG
 case "$TAB" in clock) T=1;; alarm) T=2;; stopwatch) T=4;; timer) T=8;; *) T="";; esac
 if [ -n "$T" ]; then
-  "$ADB" shell am start -n $PKG/org.fossify.clock.activities.MainActivity --ei open_tab $T >/dev/null
+  "$ADB" shell am start -n $PKG/org.fossify.clock.activities.SplashActivity --ei open_tab $T >/dev/null
 else
   "$ADB" shell monkey -p $PKG -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1
 fi

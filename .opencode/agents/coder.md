@@ -14,26 +14,17 @@ permission:
     ".opencode/*": deny
     "tools/*": deny
   external_directory: deny
+  doom_loop: deny
   webfetch: deny
   websearch: deny
+  # opencode 2.x only reliably matches exact commands / "cmd *" forms here, so agents get wrapper scripts;
+  # reading and searching go through the native read/grep/glob tools.
   bash:
     "*": deny
-    "tools/agents/compile.sh": allow
     "bash tools/agents/compile.sh": allow
-    "./tools/agents/compile.sh": allow
-    "grep *": allow
-    "rg *": allow
-    "sed -n *": allow
-    "ls*": allow
-    "find *": allow
-    "cat *": allow
-    "head *": allow
-    "tail *": allow
-    "wc *": allow
-    "git diff*": allow
-    "git status*": allow
-    "git log*": allow
-    "git show*": allow
+    "tools/agents/compile.sh": allow
+    "bash tools/agents/diff.sh": allow
+    "bash tools/agents/diff.sh *": allow
 ---
 You are a senior Android engineer implementing ONE task of a Jetpack Compose + Material 3 Expressive rewrite.
 Follow AGENTS.md strictly. Start by reading your task file, then only the files it lists.

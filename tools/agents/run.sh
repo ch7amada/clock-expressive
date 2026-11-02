@@ -11,15 +11,21 @@ mkdir -p .agent-logs
 N=1; while [ -e ".agent-logs/$TASK-$ROLE-$N.log" ]; do N=$((N+1)); done
 LOG=".agent-logs/$TASK-$ROLE-$N.log"
 
+# Qwen reasoning effort (chat-template variant defined in opencode.json): xhigh is the model default;
+# medium is much faster with little quality loss. Override with QWEN_EFFORT=low|medium|xhigh.
+QWEN_MODEL="drago/qwen3.8-27b#${QWEN_EFFORT:-medium}"
+[ "${QWEN_EFFORT:-medium}" = "xhigh" ] && QWEN_MODEL="drago/qwen3.8-27b"
+MODEL_ARGS=()
+
 case "$ROLE" in
   coder)
-    AGENT=coder
+    AGENT=coder; MODEL_ARGS=(-m "$QWEN_MODEL")
     PROMPT="Your task: implement $SPEC. Read AGENTS.md rules (already loaded) and the task file first. $EXTRA"
     ;;
   reviewer)
     AGENT=reviewer
     git add -N . 2>/dev/null   # make new files visible to `git diff`
-    PROMPT="Review the implementation of task $TASK. Spec: $SPEC. The change is the uncommitted working tree: run \`git diff --stat\` then \`git diff\` (per file if large). Read the old code it replaces where the spec names it. Then write $REVIEW using exactly this format:
+    PROMPT="Review the implementation of task $TASK. Spec: $SPEC. The change is the uncommitted working tree: run \`bash tools/agents/diff.sh\` for the summary, then \`bash tools/agents/diff.sh <path>\` for each changed file. Read the old code it replaces where the spec names it. Then write $REVIEW using exactly this format:
 # Review $TASK (round $N)
 Verdict: APPROVE | CHANGES_REQUESTED
 ## Findings
@@ -29,15 +35,15 @@ Verdict: APPROVE | CHANGES_REQUESTED
 $EXTRA"
     ;;
   fix)
-    AGENT=coder
-    PROMPT="Task $SPEC was implemented (uncommitted changes, see \`git diff --stat\`) and reviewed. Address every BLOCKER and MAJOR finding in $REVIEW (MINOR ones too if cheap). Read the review first, then only the files it mentions. Run tools/agents/compile.sh until COMPILE OK. $EXTRA"
+    AGENT=coder; MODEL_ARGS=(-m "$QWEN_MODEL")
+    PROMPT="Task $SPEC was implemented (uncommitted changes, see \`bash tools/agents/diff.sh\`) and reviewed. Address every BLOCKER and MAJOR finding in $REVIEW (MINOR ones too if cheap). Read the review first, then only the files it mentions. Run bash tools/agents/compile.sh until COMPILE OK. $EXTRA"
     ;;
   *) echo "unknown role $ROLE"; exit 1;;
 esac
 
 echo "[$(date +%T)] $ROLE $TASK -> $LOG"
 START=$(date +%s)
-timeout 80m opencode run --agent "$AGENT" --title "$TASK-$ROLE-$N" "$PROMPT" > "$LOG" 2>&1
+timeout 80m opencode run --standalone --agent "$AGENT" "${MODEL_ARGS[@]}" --title "$TASK-$ROLE-$N" "$PROMPT" > "$LOG" 2>&1
 RC=$?
 echo "[$(date +%T)] done rc=$RC in $(( ($(date +%s)-START)/60 )) min; log tail:"
 tail -15 "$LOG"

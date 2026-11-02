@@ -6,12 +6,14 @@ Expressive**. Plan: `docs/rewrite/PLAN.md`. Your assignment is always one task f
 ## Hard rules
 1. Do **only** what your task file asks. Do not touch files the task does not list, unless a compile error forces a
    one-line fix elsewhere.
-2. Your context window is small (~110K tokens). Read only the files the task lists. For big files use `grep -n` and
-   read line ranges (`sed -n '120,200p' file`). Never read the whole `res/values*/strings.xml` — grep it.
+2. Your context window is small (~110K tokens). Read only the files the task lists. Use the **read / grep / glob tools**
+   (not shell) to inspect code; for big files grep first, then read with offset/limit. Never read the whole
+   `res/values*/strings.xml` — grep it.
 3. Never edit the data layer: `models/`, `databases/`, `helpers/` (except `helpers/Config.kt` when the task says so),
    `services/`, `receivers/`, `interfaces/`.
-4. After writing code, run `tools/agents/compile.sh` and fix every error until it prints `COMPILE OK`.
-   Do not run other gradle commands. Do not run git commands that change state (no commit, checkout, reset, stash).
+4. After writing code, run `bash tools/agents/compile.sh` and fix every error until it prints `COMPILE OK`.
+   The only shell commands available are `bash tools/agents/compile.sh` and `bash tools/agents/diff.sh [path]`
+   (shows your uncommitted change). Everything else is denied — don't retry it.
 5. When finished, reply with a short summary: files created or changed, and anything you could not do.
 
 ## Tech stack (already configured — do not change gradle files)
@@ -43,7 +45,10 @@ globally, so **do not** add `@OptIn` for them.
 Exact public signatures are in `docs/rewrite/api/<Component>.md` (e.g. `ButtonGroup.md`, `ToggleButton.md`,
 `ListItem.md`, `AppBar.md`, `FloatingActionButton.md`, `WavyProgressIndicator.md`, `ShortNavigationBar.md`,
 `WideNavigationRail.md`, `TimePicker.md`, `MaterialShapes.md`, `FloatingToolbar.md`, `IconButton.md`, `Button.md`).
-**Grep them before using an expressive API — do not guess parameter names.**
+Also `ColorScheme.md`, `Typography.md` (incl. variable-font API), `ListItemDefaults.md`, `IconButtonDefaults.md`.
+**Grep them before using an expressive API — do not guess parameter names.** Library jars and the Gradle cache are
+off-limits (permission denied) — if something is not in `docs/rewrite/api/`, write your best attempt and let
+`tools/agents/compile.sh` tell you what is wrong.
 `MaterialShapes` members: Circle Square Slanted Arch Fan Arrow SemiCircle Oval Pill Triangle Diamond ClamShell Pentagon
 Gem Sunny VerySunny Cookie4Sided Cookie6Sided Cookie7Sided Cookie9Sided Cookie12Sided Ghostish Clover4Leaf Clover8Leaf
 Burst SoftBurst Boom SoftBoom Flower Puffy PuffyDiamond PixelCircle PixelTriangle Bun Heart (all `RoundedPolygon`,

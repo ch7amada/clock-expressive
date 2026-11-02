@@ -1,0 +1,22 @@
+
+### MenuDefaults.kt
+- `public fun groupShape(index: Int, count: Int): MenuGroupShapes`
+- `public fun itemShape(index: Int, count: Int): MenuItemShapes`
+- `public fun itemColors(): MenuItemColors`
+- `public fun itemShapes(shape: Shape? = null, selectedShape: Shape? = null): MenuItemShapes`
+- `public fun itemShapes(): MenuItemShapes`
+- `public fun groupShapes(shape: Shape? = null, inactiveShape: Shape? = null): MenuGroupShapes`
+- `public fun groupShapes(): MenuGroupShapes`
+- `public fun DropdownMenuGroupLabel( modifier: Modifier = Modifier, contentAlignment: Alignment = Alignment.CenterStart, padding: PaddingValues = DropdownMenuGroupLabelHorizontalPadding, content: @Composable () -> Unit, )`
+- `public fun DropdownMenuItemTrailingLabel( modifier: Modifier = Modifier, padding: PaddingValues = DropdownMenuItemTrailingLabelHorizontalPadding, content: @Composable () -> Unit, )`
+- `public fun itemColors( textColor: Color = Color.Unspecified, leadingIconColor: Color = Color.Unspecified, trailingIconColor: Color = Color.Unspecified, disabledTextColor: Color = Color.Unspecified, disabledLeadingIconColor: Color = Color.Unspecified, disabledTrailingIconColor: Color = Color.Unspecified, ): MenuItemColors`
+- `public fun itemVibrantColors(): MenuItemColors`
+- `public fun itemVibrantColors( textColor: Color = Color.Unspecified, leadingIconColor: Color = Color.Unspecified, trailingIconColor: Color = Color.Unspecified, disabledTextColor: Color = Color.Unspecified, disabledLeadingIconColor: Color = Color.Unspecified, disabledTrailingIconColor: Color = Color.Unspecified, ): MenuItemColors`
+- `public fun selectableItemColors( textColor: Color = Color.Unspecified, containerColor: Color = Color.Unspecified, leadingIconColor: Color = Color.Unspecified, trailingContentColor: Color = Color.Unspecified, disabledTextColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledLeadingIconColor: Color = Color.Unspecified, disabledTrailingContentColor: Color = Color.Unspecified, selectedTextColor: Color = Color.Unspecified, selectedContainerColor: Color = Color.Unspecified, selectedLeadingIconColor: Color = Color.Unspecified, selectedTrailingContentColor: Color = Color.Unspecified, ): SelectableMenuItemColors`
+- `public fun selectableItemVibrantColors( textColor: Color = Color.Unspecified, containerColor: Color = Color.Unspecified, leadingIconColor: Color = Color.Unspecified, trailingContentColor: Color = Color.Unspecified, disabledTextColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledLeadingIconColor: Color = Color.Unspecified, disabledTrailingContentColor: Color = Color.Unspecified, selectedTextColor: Color = Color.Unspecified, selectedContainerColor: Color = Color.Unspecified, selectedLeadingIconColor: Color = Color.Unspecified, selectedTrailingContentColor: Color = Color.Unspecified, ): SelectableMenuItemColors`
+- `public fun rememberDropdownMenuPopupPositionProvider( dropdownMenuAnchorPosition: MenuAnchorPosition, offset: DpOffset = DpOffset(0.dp, 0.dp), ): DropdownMenuPopupPositionProvider`
+- `public val TonalElevation: Dp`
+- `public val ShadowElevation: Dp`
+- `public val LeadingIconSize: Dp`
+- `public val TrailingIconSize: Dp
+- `public val GroupSpacing: Dp`

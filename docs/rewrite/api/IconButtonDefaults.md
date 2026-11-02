@@ -1,0 +1,40 @@
+
+### IconButtonDefaults.kt
+- `public fun iconButtonColors(): IconButtonColors`
+- `public fun iconButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = LocalContentColor.current, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = StandardIconButtonTokens.DisabledOpacity), ): IconButtonColors`
+- `public fun iconButtonVibrantColors(): IconButtonColors`
+- `public fun iconButtonVibrantColors( containerColor: Color = Color.Unspecified, contentColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = StandardIconButtonTokens.DisabledOpacity), ): IconButtonColors`
+- `public fun iconToggleButtonColors(): IconToggleButtonColors`
+- `public fun iconToggleButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = LocalContentColor.current, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = StandardIconButtonTokens.DisabledOpacity), checkedContainerColor: Color = Color.Unspecified, checkedContentColor: Color = Color.Unspecified, ): IconToggleButtonColors`
+- `public fun iconToggleButtonVibrantColors(): IconToggleButtonColors`
+- `public fun iconToggleButtonVibrantColors( containerColor: Color = Color.Unspecified, contentColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = StandardIconButtonTokens.DisabledOpacity), checkedContainerColor: Color = Color.Unspecified, checkedContentColor: Color = Color.Unspecified, ): IconToggleButtonColors`
+- `public fun filledIconButtonColors(): IconButtonColors`
+- `public fun filledIconButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = contentColorFor(containerColor), disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = Color.Unspecified, ): IconButtonColors`
+- `public fun filledIconToggleButtonColors(): IconToggleButtonColors`
+- `public fun filledIconToggleButtonColors( containerColor: Color = Color.Unspecified, // TODO(b/228455081): Using contentColorFor here will return OnSurfaceVariant, // while the token value is Primary. contentColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = Color.Unspecified, checkedContainerColor: Color = Color.Unspecified, checkedContentColor: Color = contentColorFor(checkedContainerColor), ): IconToggleButtonColors`
+- `public fun filledTonalIconButtonColors(): IconButtonColors`
+- `public fun filledTonalIconButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = contentColorFor(containerColor), disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = Color.Unspecified, ): IconButtonColors`
+- `public fun filledTonalIconToggleButtonColors(): IconToggleButtonColors`
+- `public fun filledTonalIconToggleButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = contentColorFor(containerColor), disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = Color.Unspecified, checkedContainerColor: Color = Color.Unspecified, checkedContentColor: Color = contentColorFor(checkedContainerColor), ): IconToggleButtonColors`
+- `public fun outlinedIconButtonColors(): IconButtonColors`
+- `public fun outlinedIconButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = LocalContentColor.current, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = OutlinedIconButtonTokens.DisabledOpacity), ): IconButtonColors`
+- `public fun outlinedIconButtonVibrantColors(): IconButtonColors`
+- `public fun outlinedIconButtonVibrantColors( containerColor: Color = Color.Unspecified, contentColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = OutlinedIconButtonTokens.DisabledOpacity), ): IconButtonColors`
+- `public fun outlinedIconToggleButtonColors(): IconToggleButtonColors`
+- `public fun outlinedIconToggleButtonColors( containerColor: Color = Color.Unspecified, contentColor: Color = LocalContentColor.current, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = OutlinedIconButtonTokens.DisabledOpacity), checkedContainerColor: Color = Color.Unspecified, checkedContentColor: Color = contentColorFor(checkedContainerColor), ): IconToggleButtonColors`
+- `public fun outlinedIconToggleButtonVibrantColors(): IconToggleButtonColors`
+- `public fun outlinedIconToggleButtonVibrantColors( containerColor: Color = Color.Unspecified, contentColor: Color = Color.Unspecified, disabledContainerColor: Color = Color.Unspecified, disabledContentColor: Color = contentColor.copy(alpha = OutlinedIconButtonTokens.DisabledOpacity), checkedContainerColor: Color = Color.Unspecified, checkedContentColor: Color = contentColorFor(checkedContainerColor), ): IconToggleButtonColors`
+- `public fun outlinedIconToggleButtonBorder(enabled: Boolean, checked: Boolean): BorderStroke?`
+- `public fun outlinedIconToggleButtonVibrantBorder( enabled: Boolean, checked: Boolean, ): BorderStroke?`
+- `public fun outlinedIconButtonBorder(enabled: Boolean): BorderStroke`
+- `public fun outlinedIconButtonVibrantBorder(enabled: Boolean): BorderStroke`
+- `public fun shapes(shape: Shape? = null, pressedShape: Shape? = null): IconButtonShapes`
+- `public fun shapes(): IconButtonShapes`
+- `public fun toggleableShapes( shape: Shape? = null, pressedShape: Shape? = null, checkedShape: Shape? = null, ): IconToggleButtonShapes`
+- `public fun toggleableShapes(): IconToggleButtonShapes`
+- `public fun extraSmallContainerSize( widthOption: IconButtonWidthOption = IconButtonWidthOption.Uniform ): DpSize`
+- `public fun smallContainerSize( widthOption: IconButtonWidthOption = IconButtonWidthOption.Uniform ): DpSize`
+- `public fun mediumContainerSize( widthOption: IconButtonWidthOption = IconButtonWidthOption.Uniform ): DpSize`
+- `public fun largeContainerSize( widthOption: IconButtonWidthOption = IconButtonWidthOption.Uniform ): DpSize`
+- `public fun extraLargeContainerSize( widthOption: IconButtonWidthOption = IconButtonWidthOption.Uniform ): DpSize`
+- `public val SmallSelectedSquareShape: Shape

@@ -9,24 +9,17 @@ permission:
     "*": deny
     "docs/rewrite/reviews/*": allow
   external_directory: deny
+  doom_loop: deny
   webfetch: deny
   websearch: deny
+  # opencode 2.x only reliably matches exact commands / "cmd *" forms here, so agents get wrapper scripts;
+  # reading and searching go through the native read/grep/glob tools.
   bash:
     "*": deny
+    "bash tools/agents/compile.sh": allow
     "tools/agents/compile.sh": allow
-    "grep *": allow
-    "rg *": allow
-    "sed -n *": allow
-    "ls*": allow
-    "find *": allow
-    "cat *": allow
-    "head *": allow
-    "tail *": allow
-    "wc *": allow
-    "git diff*": allow
-    "git status*": allow
-    "git log*": allow
-    "git show*": allow
+    "bash tools/agents/diff.sh": allow
+    "bash tools/agents/diff.sh *": allow
 ---
 You are a meticulous Android/Compose code reviewer with deep Material 3 Expressive knowledge.
 You do NOT write production code; you only write the review file you are asked for.

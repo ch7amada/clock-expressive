@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "drago": {
+      "models": {
+        "qwen3.8-27b": {
+          "variants": {
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low"
+            }
+          }
+        }
+      }
+    }
+  }
+}

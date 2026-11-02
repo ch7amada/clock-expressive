@@ -49,7 +49,7 @@ Also `ColorScheme.md`, `Typography.md` (incl. variable-font API), `ListItemDefau
 **Before writing any animation, modifier, haptics or Morph/shape code, read `docs/rewrite/api/Animation.md`** (exact imports;
 there is no `fadeInAndScaleIn`, motionScheme specs need `<Float>`, use the Compose `Matrix`, not `android.graphics.Matrix`).
 **Grep them before using an expressive API — do not guess parameter names.**
-**Real library sources** are in `.api-src/` (material3 1.5.0-beta02, compose animation/foundation/ui/runtime 1.12.1,
+**Real library sources** are in `.api-src/` (material3 1.5.0-beta02, compose animation/foundation/ui/ui-unit/ui-text/ui-geometry/runtime 1.12.1,
 graphics-shapes 1.1.0, navigation-compose/common/runtime 2.10.2, activity + activity-compose 1.13.0). When a compile error says a name/parameter is wrong, grep there with the grep tool, e.g. pattern
 `fun AlertDialog\(` in `.api-src/material3-android`, then read only the matching lines (offset/limit). Never read whole files.
 The Gradle cache and anything outside the repo are off-limits.

@@ -9,7 +9,7 @@ keeping the proven data/scheduling layer untouched.
 | Role | Who | Why |
 |---|---|---|
 | Project manager, architecture, build config, task specs, integration, visual QA, commits | Claude (orchestrator) | holds the whole picture |
-| **Coder** — writes all feature code | `qwen3.8-27b` (llama.cpp on drago, 112K ctx) via opencode agent `coder` | strongest coder; context is tight, so every task is small and self-contained |
+| **Coder** — writes all feature code | `qwen3.8-27b` (llama.cpp on drago, 96K ctx — lowered from 112K, which crashed the GPU runtime) via opencode agent `coder` | strongest coder; context is tight, so every task is small and self-contained |
 | **Reviewer** — reviews every feature diff against its spec | `ternary-bonsai-2-27b` (256K ctx) via opencode agent `reviewer` | 2-bit model, weaker at writing code, but its 256K context fits a whole diff plus every related file and the spec at once |
 
 Only one model fits in VRAM at a time; llama-server swaps on demand (~15 s), so the coder → reviewer → coder

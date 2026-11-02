@@ -41,10 +41,28 @@ $EXTRA"
   *) echo "unknown role $ROLE"; exit 1;;
 esac
 
+# Watchdog: a run whose log does not grow for STALL_MIN minutes is killed and retried (max 1 retry).
+STALL_MIN="${STALL_MIN:-25}"
+run_once() {
+  timeout 80m opencode run --standalone --agent "$AGENT" "${MODEL_ARGS[@]}" --title "$TASK-$ROLE-$N" "$PROMPT" >> "$LOG" 2>&1 &
+  local pid=$! last_size=-1 idle=0
+  while kill -0 "$pid" 2>/dev/null; do
+    sleep 60
+    local size; size=$(stat -c %s "$LOG" 2>/dev/null || echo 0)
+    if [ "$size" = "$last_size" ]; then idle=$((idle+1)); else idle=0; last_size=$size; fi
+    if [ "$idle" -ge "$STALL_MIN" ]; then
+      echo "[watchdog] no progress for $STALL_MIN min, killing" >> "$LOG"
+      pkill -P "$pid" 2>/dev/null; kill "$pid" 2>/dev/null; wait "$pid" 2>/dev/null
+      return 124
+    fi
+  done
+  wait "$pid"
+}
+
 echo "[$(date +%T)] $ROLE $TASK -> $LOG"
 START=$(date +%s)
-timeout 80m opencode run --standalone --agent "$AGENT" "${MODEL_ARGS[@]}" --title "$TASK-$ROLE-$N" "$PROMPT" > "$LOG" 2>&1
-RC=$?
+run_once; RC=$?
+if [ $RC -eq 124 ]; then echo "[$(date +%T)] stalled, retrying once"; run_once; RC=$?; fi
 echo "[$(date +%T)] done rc=$RC in $(( ($(date +%s)-START)/60 )) min; log tail:"
 tail -15 "$LOG"
 exit $RC
